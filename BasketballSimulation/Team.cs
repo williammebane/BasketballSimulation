@@ -9,17 +9,26 @@ namespace BasketballSimulation
     class Team
     {
         private string name;
-        private HashSet<Player> players;
+        private Dictionary<int, Player> players;
 
         public Team(string name)
         {
             this.name = name;
-            this.players = new HashSet<Player>();
+            this.players = new Dictionary<int, Player>();
         }
 
         public void addPlayer(Player p1)
         {
-            this.players.Add(p1);
+            int temp_id = p1.getID();
+            this.players.Add(temp_id, p1);
+        }
+
+        //return True if the team has a player with the given ID
+        public bool hasPlayer(int id)
+        {
+            if (players.ContainsKey(id)) return true;
+            return false;
+            
         }
 
         public static void Main(string[] args)
@@ -31,6 +40,14 @@ namespace BasketballSimulation
             Player danilo = new Player("Danilo Gallinari");
             Player gary = new Player("Gary Harris");
             Player emmanuel = new Player("Emmanuel Mudiay");
+            nuggets.addPlayer(kenneth);
+            nuggets.addPlayer(nikola);
+            nuggets.addPlayer(danilo);
+            nuggets.addPlayer(gary);
+            nuggets.addPlayer(emmanuel);
+
+            int id = kenneth.getID();
+
 
             Console.WriteLine("success");
             Console.ReadLine();
