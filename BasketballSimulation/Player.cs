@@ -7,8 +7,8 @@ namespace BasketballSimulation
 {
     public class Player
     {
-        String firstName;
-        String lastName;
+        private String firstName;
+        private String lastName;
         int id;
         
 
@@ -25,12 +25,22 @@ namespace BasketballSimulation
         private void setID()
         {
             Task<int> temp_id = API.getPlayerID(firstName, lastName);
-            id = temp_id.Result;
+            this.id = temp_id.Result;
         }
 
         public void updateStats()
         {
             
+        }
+
+        public int getID()
+        {
+            return this.id;
+        }
+
+        public string getName()
+        {
+            return this.firstName + " " + lastName;
         }
         
     }

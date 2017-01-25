@@ -40,5 +40,27 @@ namespace BasketballSimulation
             
         }
 
+
+        public static async Task<int> getTeamID(string teamName)
+        {
+            string url = "http://api.probasketballapi.com/team";
+            using (HttpClient client = new HttpClient())
+            {
+                Dictionary<string, string> values = new Dictionary<string, string>
+                {
+                    {"api_key", "QzwlRb9SneBNuGZortAgmvMIf7pix2ka" }, // would be better in future to avoid hardcoding this
+                    {"team_name", teamName}
+                };
+                var content = new FormUrlEncodedContent(values);
+                var response = await client.PostAsync(url, content);
+                string responseString = await response.Content.ReadAsStringAsync();
+                dynamic parsed = JsonConvert.DeserializeObject(responseString);
+                return parsed[0].id;
+
+            }
+
+        }
+
+
     }
 }
